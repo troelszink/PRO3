@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\COS Client">
+      <UniqueIdentifier>{637e4ed7-bcdb-491f-93b2-6c5769cb519e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\COS Client">
+      <UniqueIdentifier>{9420e6cc-5dbb-430d-b75c-48767cca0d7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\COS Server">
+      <UniqueIdentifier>{7acf17a2-b22d-468c-8a1c-4894faaa0f05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\KOM">
+      <UniqueIdentifier>{f8eed5e8-3872-42b4-acad-4d4fad5b9728}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\KOM">
+      <UniqueIdentifier>{08aec288-adb1-498b-806b-69e079776fff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DSP">
+      <UniqueIdentifier>{5bc1493c-73e2-471d-885a-eebcd439f33e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DSP">
+      <UniqueIdentifier>{c83f8087-5764-45d3-b162-32c3eb825237}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DSP\Filter">
+      <UniqueIdentifier>{913e163c-3716-4ce3-ab36-27a911f07210}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DSP\Filter">
+      <UniqueIdentifier>{56afc6bf-c51b-41a0-8ae2-6fd3ec902d5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\COS Server">
+      <UniqueIdentifier>{a5800bd6-1cb5-45f5-bf03-15825c9d2836}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="ArchiveClient.cpp">
+      <Filter>Source Files\COS Client</Filter>
+    </ClCompile>
+    <ClCompile Include="ClientRequestReply.cpp">
+      <Filter>Source Files\COS Client</Filter>
+    </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>Source Files\COS Client</Filter>
+    </ClCompile>
+    <ClCompile Include="ArchiveServer.cpp">
+      <Filter>Source Files\COS Server</Filter>
+    </ClCompile>
+    <ClCompile Include="OSInit.cpp">
+      <Filter>Source Files\COS Server</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerLog.cpp">
+      <Filter>Source Files\COS Server</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerRequestReply.cpp">
+      <Filter>Source Files\COS Server</Filter>
+    </ClCompile>
+    <ClCompile Include="UserConnection.cpp">
+      <Filter>Source Files\COS Server</Filter>
+    </ClCompile>
+    <ClCompile Include="User.cpp">
+      <Filter>Source Files\COS Server</Filter>
+    </ClCompile>
+    <ClCompile Include="Addresses.cpp">
+      <Filter>Source Files\KOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Deframe.cpp">
+      <Filter>Source Files\KOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Inframe.cpp">
+      <Filter>Source Files\KOM</Filter>
+    </ClCompile>
+    <ClCompile Include="InframeArchive.cpp">
+      <Filter>Source Files\KOM</Filter>
+    </ClCompile>
+    <ClCompile Include="KOMinit.cpp">
+      <Filter>Source Files\KOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Receive.cpp">
+      <Filter>Source Files\KOM</Filter>
+    </ClCompile>
+    <ClCompile Include="Send.cpp">
+      <Filter>Source Files\KOM</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioAnalysis.cpp">
+      <Filter>Source Files\DSP</Filter>
+    </ClCompile>
+    <ClCompile Include="DSPMath.cpp">
+      <Filter>Source Files\DSP</Filter>
+    </ClCompile>
+    <ClCompile Include="DTMFDecode.cpp">
+      <Filter>Source Files\DSP</Filter>
+    </ClCompile>
+    <ClCompile Include="InitFysikLag.cpp">
+      <Filter>Source Files\DSP</Filter>
+    </ClCompile>
+    <ClCompile Include="recordDTMF.cpp">
+      <Filter>Source Files\DSP</Filter>
+    </ClCompile>
+    <ClCompile Include="recordDTMFToFile.cpp">
+      <Filter>Source Files\DSP</Filter>
+    </ClCompile>
+    <ClCompile Include="StreamRecorder.cpp">
+      <Filter>Source Files\DSP</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicFilter.cpp">
+      <Filter>Source Files\DSP\Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="ParelleFilter.cpp">
+      <Filter>Source Files\DSP\Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="KaskadeFilter.cpp">
+      <Filter>Source Files\DSP\Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayDTMF.cpp">
+      <Filter>Source Files\DSP</Filter>
+    </ClCompile>
+    <ClCompile Include="COSinitClient.cpp">
+      <Filter>Source Files\COS Client</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="File.h">
+      <Filter>Header Files\COS Client</Filter>
+    </ClInclude>
+    <ClInclude Include="ArchiveClient.h">
+      <Filter>Header Files\COS Client</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientRequestReply.h">
+      <Filter>Header Files\COS Client</Filter>
+    </ClInclude>
+    <ClInclude Include="ArchiveServer.h">
+      <Filter>Header Files\COS Server</Filter>
+    </ClInclude>
+    <ClInclude Include="OSInit.h">
+      <Filter>Header Files\COS Server</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerLog.h">
+      <Filter>Header Files\COS Server</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerRequestReply.h">
+      <Filter>Header Files\COS Server</Filter>
+    </ClInclude>
+    <ClInclude Include="User.h">
+      <Filter>Header Files\COS Server</Filter>
+    </ClInclude>
+    <ClInclude Include="UserConnection.h">
+      <Filter>Header Files\COS Server</Filter>
+    </ClInclude>
+    <ClInclude Include="Addresses.h">
+      <Filter>Header Files\KOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Deframe.h">
+      <Filter>Header Files\KOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Inframe.h">
+      <Filter>Header Files\KOM</Filter>
+    </ClInclude>
+    <ClInclude Include="InframeArchive.h">
+      <Filter>Header Files\KOM</Filter>
+    </ClInclude>
+    <ClInclude Include="KOMinit.h">
+      <Filter>Header Files\KOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Receive.h">
+      <Filter>Header Files\KOM</Filter>
+    </ClInclude>
+    <ClInclude Include="Send.h">
+      <Filter>Header Files\KOM</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioAnalysis.h">
+      <Filter>Header Files\DSP</Filter>
+    </ClInclude>
+    <ClInclude Include="DSPMath.h">
+      <Filter>Header Files\DSP</Filter>
+    </ClInclude>
+    <ClInclude Include="DTMFDecode.h">
+      <Filter>Header Files\DSP</Filter>
+    </ClInclude>
+    <ClInclude Include="InitFysikLag.h">
+      <Filter>Header Files\DSP</Filter>
+    </ClInclude>
+    <ClInclude Include="recordDTMF.h">
+      <Filter>Header Files\DSP</Filter>
+    </ClInclude>
+    <ClInclude Include="recordDTMFToFile.h">
+      <Filter>Header Files\DSP</Filter>
+    </ClInclude>
+    <ClInclude Include="StreamRecorder.h">
+      <Filter>Header Files\DSP</Filter>
+    </ClInclude>
+    <ClInclude Include="KaskadeFilter.h">
+      <Filter>Header Files\DSP\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="ParelleFilter.h">
+      <Filter>Header Files\DSP\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicFilter.h">
+      <Filter>Header Files\DSP\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="Buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayDTMF.h">
+      <Filter>Header Files\DSP</Filter>
+    </ClInclude>
+    <ClInclude Include="COSinitClient.h">
+      <Filter>Header Files\COS Client</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
