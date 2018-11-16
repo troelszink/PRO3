@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Sound">
+      <UniqueIdentifier>{6e4157c0-4b35-4ef1-8c69-61c13e1607c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Analyse">
+      <UniqueIdentifier>{cd338ab1-d9e2-42a9-bf7b-8977634627a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Sound">
+      <UniqueIdentifier>{6af67e8d-b8d9-4d44-9664-0cfbc9758b05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Analyse">
+      <UniqueIdentifier>{9908bfa8-1f61-4513-9977-9b5629fc6f94}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Analyse\Filter">
+      <UniqueIdentifier>{7a2bd6df-78fa-4d53-88be-9ac490aa189f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Analyse\Filter">
+      <UniqueIdentifier>{5257c1d7-b354-4ff9-a32b-693916bd5556}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Buffer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayDTMF.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="recordDTMF.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="recordDTMFToFile.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="StreamRecorder.cpp">
+      <Filter>Source Files\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="DTMFDecode.cpp">
+      <Filter>Source Files\Analyse</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioAnalysis.cpp">
+      <Filter>Source Files\Analyse</Filter>
+    </ClCompile>
+    <ClCompile Include="DSPMath.cpp">
+      <Filter>Source Files\Analyse</Filter>
+    </ClCompile>
+    <ClCompile Include="ParelleFilter.cpp">
+      <Filter>Source Files\Analyse\Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicFilter.cpp">
+      <Filter>Source Files\Analyse\Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="KaskadeFilter.cpp">
+      <Filter>Source Files\Analyse\Filter</Filter>
+    </ClCompile>
+    <ClCompile Include="InitFysikLag.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Buffer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayDTMF.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="recordDTMF.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="recordDTMFToFile.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="StreamRecorder.h">
+      <Filter>Header Files\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="DTMFDecode.h">
+      <Filter>Header Files\Analyse</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioAnalysis.h">
+      <Filter>Header Files\Analyse</Filter>
+    </ClInclude>
+    <ClInclude Include="DSPMath.h">
+      <Filter>Header Files\Analyse</Filter>
+    </ClInclude>
+    <ClInclude Include="ParelleFilter.h">
+      <Filter>Header Files\Analyse\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicFilter.h">
+      <Filter>Header Files\Analyse\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="KaskadeFilter.h">
+      <Filter>Header Files\Analyse\Filter</Filter>
+    </ClInclude>
+    <ClInclude Include="InitFysikLag.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
