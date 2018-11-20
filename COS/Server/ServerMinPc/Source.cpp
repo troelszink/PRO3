@@ -17,13 +17,11 @@ void checkIfNumbe(string h)
 			length++;
 		}
 		nameLength = length - 5;
-		cout << h.substr(length - nameLength, nameLength);
-	
+		cout << h.substr(length - nameLength, nameLength);	
 }
 
 int main()
 {
-
 	ArchiveServer fa;
 
 	string buffer[3] = { "1 - data", "1 - data", "2 - data"};
@@ -35,6 +33,7 @@ int main()
 		{
 			cout << buffer[i].substr(0, 1) << endl;
 		}
+
 		else if (command == "1")
 		{
 			cout << buffer[i].substr(0, 1) << endl;
@@ -44,12 +43,13 @@ int main()
 		{
 			cout << buffer[i].substr(0, 1) << endl;
 		}
+
 		else if (command == "3")
 		{
 			cout << buffer[i].substr(0, 1) << endl;
 		}
-
 	}
+
 	cout << "" << endl;
 	fa.constructFile("Hello World", "Hello World", 0, 0, "Hej med dig\ndin so\næÆøØåÅ");
 	fa.constructFile("Hello World Copy", "Hello World Copy", 0, 0, "Hej med dig\ndin so\næÆøØåÅ nummer 2");

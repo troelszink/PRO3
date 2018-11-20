@@ -14,7 +14,6 @@ void UserConnection::login(string userId)
 void UserConnection::logout(string userId)
 {
 	logLogout(stoi(userId));
-
 }
 
 UserConnection::~UserConnection()
