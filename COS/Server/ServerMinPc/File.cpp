@@ -1,7 +1,7 @@
 #include "File.h"
 
-
 using namespace std;
+
 File::File()
 {
 }
@@ -13,15 +13,12 @@ File::File(string nameCon, string addressCon, int rootCon, int fileTypeCon, stri
 	root = rootCon;
 	fileType = fileTypeCon;
 	data = dataCon;
-
 }
 
 string File::getName()
 {
 	return name;
 }
-
-
 
 string File::getAddress()
 {
@@ -47,7 +44,6 @@ string File::getData()
 {
 	return data;
 }
-
 
 File::~File()
 {

@@ -3,7 +3,6 @@
 #include <iostream>
 #include <string>
 
-
 using namespace std;
 
 class ServerLog
@@ -44,5 +43,6 @@ protected:
 
 	int logAmount;
 	vector <string> logVector;
+
 };
 

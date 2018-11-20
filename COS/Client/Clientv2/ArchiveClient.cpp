@@ -19,7 +19,6 @@ void ArchiveClient::constructFile(string name, string address, int root, int fil
 	write(name, dataToWrite);
 }
 
-
 void ArchiveClient::addFile(File &f)
 {																				// For hvert fil tilføjet til vektoren Files, incrementeres fileAmount.
 	files.push_back(&f);

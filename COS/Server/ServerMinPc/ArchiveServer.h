@@ -32,7 +32,6 @@ public:
 
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------//
 
-	string getCompleteFileBinary();						// Anvendes til at hente stringen completeFileBinary.
 	string getCompleteFile();			//KIIIG			// KUN TIL TEST
 	int	   getFileAmount();
 

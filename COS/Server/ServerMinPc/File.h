@@ -2,10 +2,13 @@
 #include <array>
 
 using namespace std;
+
 class File
 {
 public:
+
 	File();
+
 	File(string name, string address, int root, int fileType, string data);
 	string getName();
 	string getAddress();
@@ -17,6 +20,7 @@ public:
 	~File();
 
 private:
+
 	string name;
 	string address;
 	int root;
@@ -24,5 +28,6 @@ private:
 	string data;
 	string fileTypes[4] = { ".txt" };
 	string rootAddress = "C:/Users/Mirzet/Dropbox/Uni 3. semester/Projekt/ServerMinPc/ServerMinPc/";
+
 };
 

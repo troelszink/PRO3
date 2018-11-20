@@ -13,6 +13,7 @@ string User::createUser()
 	{
 		return bitset<4>(1).to_string();
 	}
+
 	else
 	{
 		return bitset<4>(stoi(users[userAmount-1]) + 1).to_string();
@@ -33,13 +34,10 @@ void User::listUsers()
 	}
 }
 
-
-
 string User::getUser(int user)
 {
 	return users[user];
 }
-
 
 User::~User()
 {
