@@ -1,5 +1,5 @@
 ﻿  Source.cpp
-c:\users\bruger\projekt\dsp c++\samlet fysisklag\samlet fysisklag\audioanalysis.h(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\bruger\projekt\dsp c++\samlet fysisklag\samlet fysisklag\source.cpp(33): warning C4018: '<': signed/unsigned mismatch
-c:\users\bruger\projekt\dsp c++\samlet fysisklag\samlet fysisklag\source.cpp(53): warning C4018: '<': signed/unsigned mismatch
-  samlet FysiskLag.vcxproj -> C:\Users\Bruger\Projekt\DSP C++\samlet FysiskLag\Debug\samlet FysiskLag.exe
+c:\users\bruger\projekt\github\pro3\samlet fysisklag\samlet fysisklag\audioanalysis.h(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\bruger\projekt\github\pro3\samlet fysisklag\samlet fysisklag\source.cpp(33): warning C4018: '<': signed/unsigned mismatch
+c:\users\bruger\projekt\github\pro3\samlet fysisklag\samlet fysisklag\source.cpp(53): warning C4018: '<': signed/unsigned mismatch
+  samlet FysiskLag.vcxproj -> C:\Users\Bruger\Projekt\Github\PRO3\samlet FysiskLag\Debug\samlet FysiskLag.exe

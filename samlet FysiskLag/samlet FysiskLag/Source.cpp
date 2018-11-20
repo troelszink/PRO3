@@ -62,27 +62,27 @@ void write(vector<double> data)
 
 int main() 
 {
-	//DeviceSettings();
-	//thread recond;
-	//thread decode;
-	//bool debug = true;
+	DeviceSettings();
+	thread recond;
+	thread decode;
+	bool debug = true;
 
-	//DTMFDecode * dtmfdecode = new DTMFDecode(160,debug);
-	//decode = thread(&DTMFDecode::decode, dtmfdecode);
-	//StreamRecorder * streamreconder = new StreamRecorder();
-	//recond = thread(&StreamRecorder::startStreamRecorder,streamreconder,60);
+	DTMFDecode * dtmfdecode = new DTMFDecode(160,debug);
+	decode = thread(&DTMFDecode::decode, dtmfdecode);
+	StreamRecorder * streamreconder = new StreamRecorder();
+	recond = thread(&StreamRecorder::startStreamRecorder,streamreconder,60000);
 
-	////sleep(sf::seconds(1));
-	////PlayDTMF().play2("C0FFE");
+	//sleep(sf::seconds(1));
+	//PlayDTMF().play2("C0FFE");
 
-	//recond.join();
-	//cout << "stop reconding" << endl;
+	recond.join();
+	cout << "stop reconding" << endl;
 
-	//dtmfdecode->stop();
-	//decode.join();
+	dtmfdecode->stop();
+	decode.join();
 
-	//if (debug)
-	//	write(dtmfdecode->getDebugData());	
+	if (debug)
+		write(dtmfdecode->getDebugData());	
 
 
 	system("pause");

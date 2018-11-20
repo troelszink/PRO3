@@ -16,7 +16,12 @@ Buffer::Buffer()
 
 void Buffer::addToDTMF_SlicesBufferRecive(double newElemnt)
 {
-	DTMF_SlicesBufferRecive.push_back(newElemnt);
+	if (DTMF_SlicesBufferRecive.size() < DTMF_SlicesBufferRecive.max_size()){
+		DTMF_sliceMutex.lock();
+		DTMF_SlicesBufferRecive.push_back(newElemnt);
+		DTMF_sliceMutex.unlock();
+		
+	}
 }
 
 double Buffer::takeFromDTMF_SlicesBufferRecive()
@@ -25,7 +30,9 @@ double Buffer::takeFromDTMF_SlicesBufferRecive()
 		throw "Empty";//metode til Joakim og Andreas, try & catch.
 					  //cout << DTMFVector.size() <<endl;
 	double returnValue = DTMF_SlicesBufferRecive[0];//Kopierer elementet, inden det slettes. 
+	DTMF_sliceMutex.lock();
 	DTMF_SlicesBufferRecive.erase(DTMF_SlicesBufferRecive.begin());
+	DTMF_sliceMutex.unlock();
 	return returnValue;
 }
 

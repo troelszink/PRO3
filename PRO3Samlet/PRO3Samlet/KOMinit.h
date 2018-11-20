@@ -1,5 +1,6 @@
 #pragma once
 #include <thread>
+#include <chrono>
 #include "Buffer.h"
 #include "InframeArchive.h"
 #include "Receive.h"

@@ -29,10 +29,11 @@ string ArchiveServer::searchForFileAddress(string fileName)
 	string fileAddress;															// Filens addresse i selve server-mappen.
 	string fileRootAddress;														// Root-adressen til selve serveren.
 	string fileExtension;														// Filens type.
-
+	
 	for (int i = 0; i < fileAmount; i++)										// For-loopet kører for alle filer i vektoren Files, 
 																				// hvorefter der tjekkes på om en af dem matcher navnet på den ønskede fil.
 	{
+		cout << files[i].getName() << endl;
 
 		if (files[i].getName() == fileName)									// Der tjekkes hvorvidt fil i's navn er det samme som den ønskede fils navn.
 		{
@@ -44,6 +45,7 @@ string ArchiveServer::searchForFileAddress(string fileName)
 		}
 
 	}
+	return "";
 }
 
 void ArchiveServer::addFile(File f)

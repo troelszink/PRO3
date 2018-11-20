@@ -36,14 +36,14 @@ void Send::sendFrames(vector<string> vec, string addr)
 
 		while (true)
 		{
-			this_thread::sleep_for(chrono::seconds(1));					// Hvert sekund tjekkes det om et ACK er modtaget.
+			this_thread::sleep_for(chrono::seconds(60));					// Hvert sekund tjekkes det om et ACK er modtaget.
 			if (addrs->getAck() == 1)
 			{
 				failedAttempts = 0;										// Hvis det er tilfældet nulstilles failedAttempts og loopet afbrydes.
 				ackCountdown = timerLength;
 				break;
 			}
-			cout << "Sender:	No ack received" << endl;
+			//cout << "Sender:	No ack received" << endl;
 			ackCountdown--;												// Hvis ikke tælles timeren ned.
 
 			if (ackCountdown == 0)										// Hvis timeren er udløbet tælles failedAttempts op.
@@ -51,11 +51,11 @@ void Send::sendFrames(vector<string> vec, string addr)
 				frameToBuffer(thisFrame);
 				failedAttempts++;
 				ackCountdown = timerLength;
-				cout << "Sender:	Failed attempts = " << failedAttempts << endl;
+				//cout << "Sender:	Failed attempts = " << failedAttempts << endl;
 
 				if (failedAttempts == maxAttempts)						// Hvis failedAttemps rammer grænsen afbrydes transmissionen.
 				{
-					cout << "Sender:	Transmission failed" << endl;
+					//cout << "Sender:	Transmission failed" << endl;
 					return;
 				}
 			}
@@ -68,6 +68,7 @@ void Send::sendFrames(vector<string> vec, string addr)
 
 void Send::frameToBuffer(string thisFrame)
 {
+	cout << thisFrame << endl;
 	for (int i = 0; i < thisFrame.length(); i++)
 	{
 		bitset<4> MSBs(bitset<8>(thisFrame[i]).to_string().substr(0, 4));
@@ -76,7 +77,7 @@ void Send::frameToBuffer(string thisFrame)
 		buff->addTo_datalinkToSound(MSBs);
 		buff->addTo_datalinkToSound(LSBs);
 	}
-	buff->setFlag(1, true);
-	buff->setFlag(3, true);
+	Buffer::getInstance()->setFlag(1, true);
+	Buffer::getInstance()->setFlag(3, true);
 	///////////////////////////// Sæt flag til DSP om at et frame er sendt til buffer ///////////////////////
 }

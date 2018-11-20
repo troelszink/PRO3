@@ -12,7 +12,7 @@ public:
 	
 	void constructFile(string name, string address, int root, int fileType, string dataToWrite);
 
-	void addFile(File&);								// Tilføjer filer til vektoren Files. Her ligger alle filer på serveren.
+	void addFile(File);								// Tilføjer filer til vektoren Files. Her ligger alle filer på serveren.
 	void listFiles();									// For os selv lige pt så vi kan se hvilke filer der er i mappen.
 
 	string searchForFileAddress(string fileName);		// Leder efter adressen på filen med oplyste navn. Hvis filen findes returneres dens fulde adresse.
@@ -28,7 +28,7 @@ public:
 
 protected:
 
-	vector <File*> files;
+	vector <File> files;
 	string completeFile;
 	string receivedFile = "";
 

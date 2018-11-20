@@ -7,9 +7,31 @@
 #include "KOMinit.h"
 #include "Buffer.h"
 
+void DeviceSettings()//P2A
+{
+	if (SoundRecorder::isAvailable())
+	{
+
+		vector<string> deviceNameList = SoundRecorder::getAvailableDevices();
+		cout << "This is the list of your " << deviceNameList.size() << " available devices: " << endl;
+		for (int i = 0; i < deviceNameList.size(); i++)
+		{
+			cout << i << ": " << deviceNameList[i] << endl;
+
+		}
+
+		cout << endl << "Current device is: " << SoundRecorder::getDefaultDevice() << endl;
+	}
+	else
+		cout << "There are no devices available" << endl; // simplel fejlmeddelelse
+		//throw "There are no devices available";// knap så simplel
+
+
+}
 
 int main()
 {
+	DeviceSettings();
 	thread cos;
 	thread kom;
 	thread dsp;
@@ -30,12 +52,12 @@ int main()
 			cos = thread(&COSInit::run, server);
 		}
 
+		InitFysikLag * fysik = new InitFysikLag();
+		dsp = thread(&InitFysikLag::run, fysik);
 
 		KOMinit * initKOM = new KOMinit();
 		kom = thread(&KOMinit::run, initKOM);
 
-		InitFysikLag * fysik = new InitFysikLag();
-		dsp = thread(&InitFysikLag::run, fysik);
 
 		a = 0;
 		cout << "enter 1 to stop" << endl;
@@ -51,5 +73,6 @@ int main()
 		cos.join();
 
 	}
+	system("pause");
 	return 0;
 }

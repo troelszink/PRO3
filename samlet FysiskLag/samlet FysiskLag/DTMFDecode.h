@@ -6,10 +6,8 @@
 #include <string>
 #include <array>
 #include <vector>
-
-#include "Buffer.h"
 #include "AudioAnalysis.h"
-#include "AudioSample.h"
+#include "Buffer.h"
 
 using namespace sf;
 using namespace std;

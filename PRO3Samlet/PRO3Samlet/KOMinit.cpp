@@ -30,7 +30,14 @@ void KOMinit::receiveThread()
 	Receive rec;
 	while (true)
 	{
-		rec.receiveBits(buff->takeFrom_datalinkToSound());
+		try
+		{
+			rec.receiveBits(buff->takeFrom_soundToDatalink());
+		}
+		catch (...)
+		{
+			this_thread::sleep_for(chrono::milliseconds(20));
+		}
 		if (buff->checkFlag(0))
 			break;
 	}
@@ -40,10 +47,17 @@ void KOMinit::sendThread()
 {
 	while (true)
 	{
-		string stringToSend = buff->takeFrom_appToDatalink();
-		InframeArchive toSend(stringToSend);
-		toSend.sendFrames();
+		try
+		{
+			string stringToSend = buff->takeFrom_appToDatalink();
+			InframeArchive toSend(stringToSend);
+			toSend.sendFrames();
 
+		}
+		catch (...)
+		{
+			this_thread::sleep_for(chrono::milliseconds(20));
+		}
 		if (buff->checkFlag(0))
 			break;
 	}

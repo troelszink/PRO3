@@ -1,20 +1,9 @@
-﻿  Addresses.cpp
-  ArchiveClient.cpp
-  ArchiveServer.cpp
-c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\archiveserver.cpp(173): warning C4804: '<': unsafe use of type 'bool' in operation
-  ClientRequestReply.cpp
-  COSinitClient.cpp
-  File.cpp
-  Inframe.cpp
-c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\inframe.cpp(174): warning C4018: '<': signed/unsigned mismatch
-  OSInit.cpp
-  ServerRequestReply.cpp
-  Source.cpp
+﻿  Source.cpp
 c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\audioanalysis.h(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\source.cpp(17): warning C4018: '<': signed/unsigned mismatch
   Generating code
-c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\playdtmf.cpp(71): warning C4715: 'PlayDTMF::bit2hex': not all control paths return a value
-c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\buffer.cpp(137): warning C4715: 'Buffer::getBufferLength': not all control paths return a value
-c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\archiveclient.cpp(53): warning C4715: 'ArchiveClient::searchForFileAddress': not all control paths return a value
-  All 1998 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  3 of 1993 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    2 functions were new in current compilation
+    40 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   PRO3Samlet.vcxproj -> C:\Users\Bruger\Projekt\Github\PRO3\PRO3Samlet\Release\PRO3Samlet.exe

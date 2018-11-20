@@ -31,8 +31,11 @@ void StreamRecorder::startStreamRecorder(int aRecTime)//P7B(int aRecTime, Buffer
 			micInput.stop();
 			//cout << "recording finnished" << endl;
 		}
-		else 
-			sf::sleep(sf::milliseconds(50)); 
+		else
+		{
+			Buffer::getInstance()->setFlag(2, true);
+			sf::sleep(sf::milliseconds(1));
+		}
 
 		if (Buffer::getInstance()->checkFlag(0))
 			break;
@@ -48,16 +51,6 @@ bool StreamRecorder::onStart()
 
 bool StreamRecorder::onProcessSamples(const Int16 * samples, size_t sampleCount)//Tager et vindue ad gangen.
 {
-
-	//cout << "Number of samples: " << sampleCount << endl;
-
-	//int maxSample = 2;
-	//for (int i = 0; i < sampleCount; i++)
-	//{
-	//	if (abs(samples[i]) > maxSample)
-	//		maxSample = abs(samples[i]);
-	//}
-	//cout << "Max: " << maxSample << '\n' << endl;
 
 	for (int i = 0; i < sampleCount; i++)
 		Buffer::getInstance()->addToDTMF_SlicesBufferRecive((int) samples[i]);

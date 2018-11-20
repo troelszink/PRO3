@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <array>
+#include <mutex>
 #include <exception>
 #include <fstream>
 #include <iterator>
@@ -47,6 +48,7 @@ private:
 	~Buffer();
 
 	vector<double>DTMF_SlicesBufferRecive;//Er til at opbevare bider af funde og endnu ikke godkendte DTMF toner.
+	mutex DTMF_sliceMutex;
 	vector<bitset<4>>soundToDatalink;//Er til at opbevare funde og godkendte DTMF toner.
 
 	vector<bitset<4>>datalinkToSound;//Er til at opbevare DTMF toner, der skal afspilles.

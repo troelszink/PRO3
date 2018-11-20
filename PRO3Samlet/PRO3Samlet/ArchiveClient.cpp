@@ -20,9 +20,9 @@ void ArchiveClient::constructFile(string name, string address, int root, int fil
 }
 
 
-void ArchiveClient::addFile(File &f)
+void ArchiveClient::addFile(File f)
 {																				// For hvert fil tilføjet til vektoren Files, incrementeres fileAmount.
-	files.push_back(&f);
+	files.push_back(f);
 	fileAmount++;
 }
 
@@ -30,26 +30,28 @@ void ArchiveClient::listFiles()
 {
 	for (int i = 0; i < fileAmount; i++)
 	{
-		cout << files[i]->getAddress() + files[i]->getFileType() << endl;
+		cout << files[i].getAddress() + files[i].getFileType() << endl;
 	}
 }
 
 string ArchiveClient::searchForFileAddress(string fileName)
 {
+
 	string fileAddress;															// Filens addresse i selve server-mappen.
 	string fileRootAddress;														// Root-adressen til selve serveren.
-	string fileExtension;														// Filens type.
-	
+	string fileExtension;														// Filens type
 	for (int i = 0; i < fileAmount; i++)										// For-loopet kører for alle filer i vektoren Files, 																			// hvorefter der tjekkes på om en af dem matcher navnet på den ønskede fil.
 	{
-		if (files[i]->getName() == fileName)									// Der tjekkes hvorvidt fil i's navn er det samme som den ønskede fils navn.
+		if (files[i].getName() == fileName)									// Der tjekkes hvorvidt fil i's navn er det samme som den ønskede fils navn.
 		{
-			fileAddress = files[i]->getAddress();								
+			fileAddress = files[i].getAddress();								
 			fileRootAddress = getRootAddress();
 			fileExtension = getFileType();
 			return fileRootAddress+fileAddress+fileExtension;					// Returnerer den fulde sti til filen.
 		}
 	}
+
+	return "";
 }
 
 
@@ -66,7 +68,7 @@ void ArchiveClient::write(string fileName, string receivedFile)			// Downloader 
 	fileToWrite << receivedFile;												// Det ønskede data skrives ind i den åbne fil.
 	fileToWrite.close();
 
-	cout << receivedFile << endl;
+	//cout << receivedFile << endl;
 
 	receivedFile.clear();														// Indholdet på receivedFile slettes, så det tidligere indhold ikke kommer med de nye filer
 }

@@ -7,6 +7,7 @@ InitFysikLag::InitFysikLag()
 
 void InitFysikLag::run()
 {
+	
 	DTMFDecode * dtmfdecode = new DTMFDecode(160, false);
 	decode = thread(&DTMFDecode::decode, dtmfdecode);
 
@@ -15,7 +16,7 @@ void InitFysikLag::run()
 
 	PlayDTMF * playDTMF = new PlayDTMF();
 	send = thread(&PlayDTMF::handler, playDTMF);
-
+	
 	decode.join();
 	record.join();
 	send.join();

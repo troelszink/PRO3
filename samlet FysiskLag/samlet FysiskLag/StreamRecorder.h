@@ -4,7 +4,6 @@
 #include <deque>
 #include <mutex>
 
-#include "AudioSample.h"
 #include "Buffer.h"
 
 using namespace sf;
