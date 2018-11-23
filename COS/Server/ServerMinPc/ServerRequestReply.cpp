@@ -9,7 +9,7 @@ ServerRequestReply::ServerRequestReply()
 
 void ServerRequestReply::extract_Execute()
 {
-	while (true)
+	while (true && !Buffer::getInstance()->checkFlag(0))
 	{
 		try
 		{
@@ -57,7 +57,7 @@ void ServerRequestReply::extract_Execute()
 
 				if (elementS[8] == '0') //listFiles
 				{
-					sendFileList();
+					buffer->addTo_appToDatalink(currentUser + serverAddress + "0" + sendFileList());
 				}
 
 				else if (elementS[8] == '4') //broadcast signal

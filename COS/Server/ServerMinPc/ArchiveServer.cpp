@@ -57,9 +57,15 @@ void ArchiveServer::addFileNames(string n)
 	fileNameAmount++;
 }
 
-void ArchiveServer::sendFileList()
+string ArchiveServer::sendFileList()
 {
+	string fileList;
 
+	for (int i = 0; i < fileAmount; i++)
+	{
+		fileList += files[i].getName() + "/n";
+	}
+	return fileList;
 }
 
 void ArchiveServer::fileOnServer(string fileNameCon)
