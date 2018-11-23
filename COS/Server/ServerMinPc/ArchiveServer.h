@@ -21,7 +21,7 @@ public:
 	string searchForFileAddress(string fileName);		// Leder efter adressen på filen med oplyste navn. Hvis filen findes returneres dens fulde adresse.
 	void addFile(File f);								// Tilføjer filer til vektoren Files. Her ligger alle filer på serveren.
 	void addFileNames(string n);
-	void listFiles();									// Skal sende alle filnavne klienten ikke har 
+	void sendFileList();									// Skal sende alle filnavne klienten ikke har 
 	void fileOnServer(string fileName);
 
 	//-----------------------------------------------------------------------------------------------------------------------------------------------------------//
