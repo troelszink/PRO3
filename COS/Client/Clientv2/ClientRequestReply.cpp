@@ -60,25 +60,28 @@ void ClientRequestReply::upload(string fileName, int command)
 
 void ClientRequestReply::download(string fileName)
 {
-	string fileData = buffer->takeFrom_datalinkToApp();
-
-	if (fileData[8] == 0)
+	while (true && !Buffer::getInstance()->checkFlag(0))
 	{
-		//skal have modtaget navne på filer fra server.
-	}
+		string fileData = buffer->takeFrom_datalinkToApp();
 
-	else if (fileData[8] == 2)
-	{
-		constructFile(fileName, fileName, 0, 0, fileData.substr(9, completeFile.length() - 1));
-	}
+		if (fileData[8] == 0)
+		{
+			//skal have modtaget navne på filer fra server.
+		}
 
-	else if (fileData[8] == 4)
-	{
-		bitset <4> b (stoi(fileData.substr(8, 2)));
-		clientAddress = b.to_string();
-		
-		/*b=b.to_ulong();
-		b.to_string();*/
+		else if (fileData[8] == 2)
+		{
+			constructFile(fileName, fileName, 0, 0, fileData.substr(9, completeFile.length() - 1));
+		}
+
+		else if (fileData[8] == 4)
+		{
+			bitset <4> b(stoi(fileData.substr(8, 2)));
+			clientAddress = b.to_string();
+
+			/*b=b.to_ulong();
+			b.to_string();*/
+		}
 	}
 }
 
