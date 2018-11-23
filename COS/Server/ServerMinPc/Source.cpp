@@ -55,9 +55,9 @@ int main()
 	fa.constructFile("Hello World Copy", "Hello World Copy", 0, 0, "Hej med dig\ndin so\næÆøØåÅ nummer 2");
 	fa.read("Hello World");
 	fa.read("Hello World Copy");
-	fa.listFiles();
+	fa.sendFileList();
 	fa.removeFile("Hello World");
-	fa.listFiles();
+	fa.sendFileList();
 
 	checkIfNumbe("01 1 hej med dig\n");
 

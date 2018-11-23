@@ -42,6 +42,7 @@ string ArchiveServer::searchForFileAddress(string fileName)
 			return fileRAE;														// Returnerer den fulde sti til filen.
 		}
 	}
+	throw "No Such File";
 }
 
 void ArchiveServer::addFile(File f)
@@ -56,15 +57,15 @@ void ArchiveServer::addFileNames(string n)
 	fileNameAmount++;
 }
 
-void ArchiveServer::listFiles()
+string ArchiveServer::sendFileList()
 {
-	cout << endl << "-----------------------------[Files on server]----------------------------------" << endl;
+	string fileList;
 
 	for (int i = 0; i < fileAmount; i++)
 	{
-		cout << "~[ " <<files[i].getAddress() + files[i].getFileType() << " ]~" << endl;
+		fileList += files[i].getName() + "/n";
 	}
-	cout << endl;
+	return fileList;
 }
 
 void ArchiveServer::fileOnServer(string fileNameCon)
@@ -112,7 +113,7 @@ void ArchiveServer::removeFile(string fileName)
 {
 	string fileToBeRemoved = searchForFileAddress(fileName);
 
-	const char *fileToBeRemovedConv = fileToBeRemoved.c_str();
+	const char* fileToBeRemovedConv = fileToBeRemoved.c_str();
 
 	remove(fileToBeRemovedConv);
 	fileOnServer(fileName);
