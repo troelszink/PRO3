@@ -3,13 +3,7 @@
 
 
 KOMinit::KOMinit()
-{
-	buff = Buffer::getInstance();
-	thread t1(&KOMinit::receiveThread,this);
-	thread t2(&KOMinit::sendThread,this);
-	t1.join();
-	t2.join();
-}
+{ }
 
 
 KOMinit::~KOMinit()

@@ -48,13 +48,36 @@ void ClientRequestReply::upload(string fileName, int command)
 {
 	if (command == 0)
 	{
-		buffer->addTo_appToDatalink("000011110");
+		while (true)
+		{
+			try
+			{
+				buffer->addTo_appToDatalink("000011110");
+				break;
+			}
+			catch (...)
+			{
+				this_thread::sleep_for(chrono::milliseconds(20));
+			}
+		}
 	}
 	else if (command == 1)
 	{
 		read(fileName);
 		completeFile = serverAddress + clientAddress + "1" + completeFile;
-		buffer->addTo_appToDatalink(completeFile);
+
+		while (true)
+		{
+			try
+			{
+				buffer->addTo_appToDatalink(completeFile);
+				break;
+			}
+			catch (...)
+			{
+				this_thread::sleep_for(chrono::milliseconds(20));
+			}
+		}
 	}
 
 	

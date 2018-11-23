@@ -1,9 +1,31 @@
-﻿  Source.cpp
-c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\audioanalysis.h(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+﻿  Buffer.cpp
+  COSinitClient.cpp
+  ClientRequestReply.cpp
+  DTMFDecode.cpp
+  InframeArchive.cpp
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\inframearchive.cpp(31): warning C4018: '<': signed/unsigned mismatch
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\inframearchive.cpp(41): warning C4018: '<': signed/unsigned mismatch
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\inframearchive.cpp(57): warning C4018: '<': signed/unsigned mismatch
+  InitFysikLag.cpp
+  KOMinit.cpp
+  OSInit.cpp
+  PlayDTMF.cpp
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\playdtmf.cpp(87): warning C4018: '<': signed/unsigned mismatch
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\playdtmf.cpp(132): warning C4244: '=': conversion from 'double' to 'sf::Int16', possible loss of data
+  Receive.cpp
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\receive.cpp(18): warning C4018: '>=': signed/unsigned mismatch
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\receive.cpp(76): warning C4018: '<': signed/unsigned mismatch
+  Send.cpp
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\send.cpp(30): warning C4018: '<': signed/unsigned mismatch
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\send.cpp(72): warning C4018: '<': signed/unsigned mismatch
+  ServerRequestReply.cpp
+  Source.cpp
 c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\source.cpp(17): warning C4018: '<': signed/unsigned mismatch
+  StreamRecorder.cpp
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\streamrecorder.cpp(55): warning C4018: '<': signed/unsigned mismatch
   Generating code
-  3 of 1993 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
-    2 functions were new in current compilation
-    40 functions had inline decision re-evaluated but remain unchanged
+  0 of 2744 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   PRO3Samlet.vcxproj -> C:\Users\Bruger\Projekt\Github\PRO3\PRO3Samlet\Release\PRO3Samlet.exe
