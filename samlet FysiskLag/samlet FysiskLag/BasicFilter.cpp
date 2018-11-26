@@ -45,6 +45,16 @@ double BasicFilter::filter(double xn)
 	return y;
 }
 
+std::vector<double> BasicFilter::getA()
+{
+	return a;
+}
+
+std::vector<double> BasicFilter::getB()
+{
+	return b;
+}
+
 
 BasicFilter::~BasicFilter()
 {}
