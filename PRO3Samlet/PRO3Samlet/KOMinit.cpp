@@ -1,23 +1,16 @@
 #include "KOMinit.h"
 
-
-
 KOMinit::KOMinit()
-{ }
-
-
-KOMinit::~KOMinit()
-{}
-
-void KOMinit::run()
 {
-
 	buff = Buffer::getInstance();
-	thread t1(&KOMinit::receiveThread, this);
-	thread t2(&KOMinit::sendThread, this);
+	thread t1(&KOMinit::sendThread, this);
+	thread t2(&KOMinit::receiveThread, this);
 	t1.join();
 	t2.join();
 }
+
+KOMinit::~KOMinit()
+{}
 
 void KOMinit::receiveThread()
 {
@@ -46,7 +39,6 @@ void KOMinit::sendThread()
 			string stringToSend = buff->takeFrom_appToDatalink();
 			InframeArchive toSend(stringToSend);
 			toSend.sendFrames();
-
 		}
 		catch (...)
 		{
@@ -55,5 +47,4 @@ void KOMinit::sendThread()
 		if (buff->checkFlag(0))
 			break;
 	}
-	
 }

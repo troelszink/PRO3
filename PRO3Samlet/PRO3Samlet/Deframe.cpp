@@ -1,8 +1,7 @@
 #include "Deframe.h"
 
 Deframe::Deframe()
-{
-}
+{}
 
 Deframe::Deframe(string frm, string taddr, string oaddr)		// Denne klasse bruges til at at afkode en modtagen bitstring.
 {
@@ -35,8 +34,7 @@ void Deframe::bitdestuffing()									// Fjerner de ekstra 0'er der indsættes i 
 			bitString.erase(pos + 5, 1);
 			i = pos + 5;										// Indekset placeres efter sekvensen og der tjekkes igennem igen.
 		}
-		else
-			break;
+		else break;
 	}
 }
 
@@ -61,14 +59,14 @@ void Deframe::decodeCRC8()										// På præcist samme måde som i Inframe XOR'e
 	string remainder = bitStringCopy.substr(bitStringCopy.length() - 8, 8);
 	bitString.erase(bitString.length() - 8, 8);					// Remainderen på 8 bit fjernes fra bitstring.
 
-	if (remainder == "00000000")								// Hvis remainderen = 0 findes der ingen fejl og receiveSuccess = true, og analysen fortsætter.
+	if (remainder == "00000000")								// Hvis remainderen = 0 findes der ingen fejl og analysen fortsætter.
 	{
-		receiveSuccess = true;
 		checkAddresses();
 	}
 	else
 	{
 		receiveSuccess = false;									// Hvis ikke er framet fejlfyldt og recieveSuccess = false, og analysen stopper her.
+		return;
 	}
 }
 
@@ -78,11 +76,12 @@ void Deframe::checkAddresses()									// Adresserne tjekkes.
 	otherAddress = bitString.substr(4, 4);
 	Addresses* addrs = Addresses::getInstance();
 	
-	if (addrs->getOtherAdress() != "")
+	if (addrs->getOtherAddress() != "")
 	{
-		if (thisAddress != addrs->getThisAddress() || otherAddress != addrs->getOtherAdress())
+		if (thisAddress != addrs->getThisAddress() || otherAddress != addrs->getOtherAddress())
 		{
 			receiveSuccess = false;
+			return;
 		}
 	}
 	else
@@ -90,57 +89,33 @@ void Deframe::checkAddresses()									// Adresserne tjekkes.
 		if (thisAddress != addrs->getThisAddress())
 		{
 			receiveSuccess = false;
+			return;
 		}
 	}
+	receiveSuccess = true;										// Hvis CRC- og adressetjek godkendes er pakken til os og deframing fortsætter.
 	bitString.erase(0, 8);
-	//if (receiveSuccess)
-		//cout << "checkAddresses done: " << bitString << "               " << bitString.length() << endl;
 	checkControl();
 }
 
-void Deframe::checkControl()									// Controlbittene tjekkes igennem, og informationerne overføres til værdier som kan hentes af Transmission-klassen.
+void Deframe::checkControl()									// Controlbittene tjekkes igennem, og informationerne overføres til værdier som kan hentes af Receive-klassen.
 {
-	cout << "Control: " << bitString.substr(0, 8) << endl;
+	lastFrame = bitString[4];
+	bitset<3> frmno(bitString.substr(5, 3));
+	frameNo = frmno.to_ulong();
+
 	if (bitString[0] == '0')									// if (I-frame)
 	{
 		frameType = 'I';
-		bitset<3> frmno(bitString.substr(1, 3));
-		frameNo = frmno.to_ulong();
-		
-		if (bitString[4] == '1')
-		{
-			lastFrame = true;
-		}
-		else
-		{
-			lastFrame = false;
-		}
-		recoverDataBit();										// Efter kontrolinformationerne fjernes alt andet en data-delen der skal videre til App-laget.
+		bitString.erase(0, 8);									// Efter kontrolinformationerne fjernes alt andet en data-delen der skal videre til App-laget.
 		compressToAscii();
 	}
-	else if (bitString.substr(0, 2) == "10")					// if (S-frame)
+	else if (bitString[0] == '1')								// if (S-frame)
 	{
-		frameType = 'S';
-		bitset<3> frmno(bitString.substr(5, 3));
-		frameNo = frmno.to_ulong();
-
-		if (bitString[4] == '1')
-		{
-			lastFrame = true;
-		}
-		else
-		{
-			lastFrame = false;
-		}														// Da der ikke er noget data i et S-frame stopper analysen her.
+		frameType = 'S';										// Da der ikke er noget data i et S-frame stopper analysen her.						
 	}
 }
 
-void Deframe::recoverDataBit()									// Controlbittene fjernes så der kun er data-sektionen tilbage.
-{
-	bitString.erase(0, 8);
-}
-
-void Deframe::compressToAscii()									// På samme måde som i Inframe komprimeres stringen af binære værdier til ascii-karakterer for at mindske hukommelsesforbruget.
+void Deframe::compressToAscii()									// Strengen af binære værdier oversættes til ascii-karakterer til den endelige fil.
 {
 	stringstream sstream(bitString);
 	char c;
@@ -150,13 +125,12 @@ void Deframe::compressToAscii()									// På samme måde som i Inframe komprimer
 		sstream >> bits;
 
 		c = char(bits.to_ulong());
-
 		asciiDataBit += c;
 	}
 	asciiDataBit.erase(asciiDataBit.length() - 1, 1);
 }
 
-string Deframe::getBitString()
+string Deframe::getBitString()									//Debugging
 {
 	return bitString;
 }
@@ -186,7 +160,7 @@ int Deframe::getFrameNo()
 	return frameNo;
 }
 
-bool Deframe::getLastFrame()
+char Deframe::getLastFrame()
 {
 	return lastFrame;
 }
@@ -197,5 +171,4 @@ bool Deframe::getReceiveSuccess()
 }
 
 Deframe::~Deframe()
-{
-}
+{}

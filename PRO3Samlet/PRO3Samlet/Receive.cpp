@@ -5,15 +5,16 @@ Receive::Receive()
 	frameCnt = 0;														// Tæller hvilket frame send-metoden er nået til.
 	bitstream = "";														// Bruges i receiveBits til midlertidigt at gemme de modtagne nibbles.
 	minFrameLength = 40;												// Sørger for at der ikke tjekkes efter flag inden det er realistisk at et frame er modtaget.
+	addrs = Addresses::getInstance();									// En pointer til Addresses-klassen oprettes.
+	buff = Buffer::getInstance();										// En pointer til Buffer-klassen oprettes.
 }
 
 Receive::~Receive()
 {}
 
 void Receive::receiveBits(bitset<4> bits)
-{
-	string nibble = bits.to_string();									// Den modtagne bitset oversættes til en string, og tilføjes til bitstream.
-	bitstream += nibble;
+{									
+	bitstream += bits.to_string();										// Den modtagne bitset oversættes til en string, og tilføjes til bitstream.
 
 	if (bitstream.length() >= minFrameLength)							// Når bitstream-længden overstiger minimum tjekkes det om der er modtaget ét flag.
 	{
@@ -43,62 +44,81 @@ void Receive::interpret(string recFrm)
 	{
 		cout << "ReceiveSuccess == false" << endl;
 		return;
-	}
-	else																// Hvis ikke, tjekkes typen af frame.
+	}																	// Hvis ikke, tjekkes typen af frame.
+	else if (df.getFrameType() == 'I' && df.getFrameNo() == frameCnt)	// Hvis det er I-frame og forventede framenummer
 	{
-		if (df.getFrameType() == 'I')
+		asciiFile += df.getAsciiDataBit();								// Data fra framen tilføjes den endelige fil
+		frameCnt = (frameCnt + 1) % 8;
+		string ackAddresses = df.getOtherAddress() + df.getThisAddress();
+
+		//*********************Send Ack:***********************			// Når frametdataet er tilføjet til asciiFile skal der sendes et Ack.
+		sendAck(df.getLastFrame(), ackAddresses);
+
+		if (df.getLastFrame() == '1')
 		{
-			if (df.getFrameNo() == frameCnt)							// Hvis det er et I-frame og nummeret matcher frameCnt, tilføjes dataet til en string der i sidste ende skal indeholde hele den sendte fil.
+			while (true && !buff->checkFlag(0))
 			{
-				asciiFile += df.getAsciiDataBit();
-
-				if (df.getLastFrame() == true)
+				try
 				{
-					buff->addTo_datalinkToApp(asciiFile);				// Når det sidste frame er modtaget gemmes filen i bufferen til App-laget.	
+					buff->addTo_datalinkToApp(asciiFile);				// Når det sidste frame er modtaget gemmes filen i bufferen til App-laget.
 				}
-
-				//********************************Send Ack:********************************************************************
-
-				frameCnt = (df.getFrameNo() + 1) % 8;					// Når frametdataet er tilføjet til asciiFile skal der sendes et Ack.		
-				char lastF;
-				if (df.getLastFrame())
+				catch (...)
 				{
-					lastF = '1';
+					this_thread::sleep_for(chrono::milliseconds(10));
 				}
-				else
-				{
-					lastF = '0';
-				}
-
-				string ackAddresses = df.getOtherAddress() + df.getThisAddress();
-				Inframe ackFrame("", 1, frameCnt, lastF, ackAddresses);		// Inframe-klassen kaldes med en tom data-sektion, frametype = 1, frameCnt på det næste frame der ønskes modtaget, hvorvidt der kvitteres for det sidste frame, og adresserne.
-																			// Framet oversættes til bitset-nibbles og indsættes i bufferen til det fysiske lag.
-				for (int i = 0; i < ackFrame.getFinalFrame().length(); i++)
-				{
-					bitset<4> MSBs(bitset<8>(ackFrame.getFinalFrame()[i]).to_string().substr(0, 4));
-					bitset<4> LSBs(bitset<8>(ackFrame.getFinalFrame()[i]).to_string().substr(4, 4));
-
-					buff->addTo_datalinkToSound(MSBs);
-					buff->addTo_datalinkToSound(LSBs);
-				}
-				
-				buff->setFlag(1, true);
-				buff->setFlag(3, true);
 			}
-		}
-		else if (df.getFrameType() == 'S')									// Hvis det modtagne frame er et Ack opdateres frameCnt til dét der angives i Ack'et.
-		{
-			//frameCnt = df.getFrameNo();
-			int nextFrame = (addrs->getFrameNr() + 1) % 8;
-			if (df.getFrameNo() == nextFrame)
-			{
-				if (df.getLastFrame())
-				{
-					cout << "Transmission Successfull" << endl;				// Hvis Acket er for det sidste frame er der sket en succesfuld transmission.
-				}
-				addrs->setAck(1);											// ack sættes til 1 for at sige at et frame er modtaget korrekt, og at det næste frame godt kan afsendes.
-			}
-																										
+			asciiFile = "";												// asciiFile og frameCnt nulstilles til næste fil
+			frameCnt = 0;												
 		}
 	}
+	else if (df.getFrameType() == 'S')									// Hvis det modtagne frame er et Ack opdateres frameCnt til dét der angives i Ack'et.
+	{
+		int nextFrame = (addrs->getFrameNo() + 1) % 8;
+		if (df.getFrameNo() == nextFrame)
+		{
+			if (df.getLastFrame())
+			{
+				cout << "Transmission Successfull" << endl;				// Hvis Acket er for det sidste frame er der sket en succesfuld transmission.
+			}
+			addrs->setAck(1);											// ack sættes til 1 for at sige at et frame er modtaget korrekt, og at det næste frame godt kan afsendes.
+		}																								
+	}
+}
+
+void Receive::sendAck(char lastframe, string ackaddrs)
+{
+	Inframe ackFrame("", 1, frameCnt, lastframe, ackaddrs);				// Inframe-klassen kaldes med en tom data-sektion, frametype = 1, frameCnt på det næste frame der ønskes modtaget, hvorvidt der kvitteres for det sidste frame, og adresserne.
+																		// Framet oversættes til bitset-nibbles og indsættes i bufferen til det fysiske lag.
+	for (int i = 0; i < ackFrame.getFinalFrame().length(); i++)
+	{
+		bitset<4> MSBs(bitset<8>(ackFrame.getFinalFrame()[i]).to_string().substr(0, 4));
+		bitset<4> LSBs(bitset<8>(ackFrame.getFinalFrame()[i]).to_string().substr(4, 4));
+
+		while (true && !buff->checkFlag(0))
+		{
+			try
+			{
+				buff->addTo_datalinkToSound(MSBs);
+				break;
+			}
+			catch (...)
+			{
+				this_thread::sleep_for(chrono::milliseconds(10));
+			}
+		}
+		while (true && !buff->checkFlag(0))
+		{
+			try
+			{
+				buff->addTo_datalinkToSound(LSBs);
+				break;
+			}
+			catch (...)
+			{
+				this_thread::sleep_for(chrono::milliseconds(10));
+			}
+		}
+	}
+	buff->setFlag(1, true);
+	buff->setFlag(3, true);
 }

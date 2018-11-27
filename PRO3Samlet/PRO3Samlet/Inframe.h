@@ -12,8 +12,7 @@ public:
 	Inframe(string, int, int, char, string);
 	void runInframe();
 	void expandToBinary();
-	void addIControl();
-	void addSControl();
+	void addControl();
 	void addAddresses();
 	void encodeCRC8();
 	void bitstuffing();

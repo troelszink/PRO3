@@ -10,13 +10,13 @@ public:
 	void setThisAddress(string);
 	void setOtherAddress(string);
 	void setAck(int);
-	void setFrameNr(int);
+	void setFrameNo(int);
 
 	string getThisAddress();
-	string getOtherAdress();
+	string getOtherAddress();
 
 	int getAck();
-	int getFrameNr();
+	int getFrameNo();
 
 	~Addresses();
 
@@ -28,6 +28,6 @@ private:
 	string otherAddress;
 
 	int ack;
-	int frameNr;
+	int frameNo;
 };
 

@@ -1,11 +1,10 @@
 #pragma once
 using namespace std;
-#include "Addresses.h"
 #include <string>
 #include <iostream>
 #include <bitset>
 #include <sstream>
-
+#include "Addresses.h"
 
 class Deframe
 {
@@ -19,7 +18,6 @@ public:
 	void decodeCRC8();
 	void checkAddresses();
 	void checkControl();
-	void recoverDataBit();
 	void compressToAscii();
 
 	string getBitString();
@@ -27,16 +25,18 @@ public:
 	string getThisAddress();
 	string getOtherAddress();
 	
-	char getFrameType();
 	int getFrameNo();
-	bool getLastFrame();
+	char getFrameType();
+	char getLastFrame();
 	bool getReceiveSuccess();
 
 	~Deframe();
+
 private:
 	int frameNo;
-	
 	char frameType;
+	char lastFrame;
+	bool receiveSuccess;
 
 	string asciiString;
 	string bitString;
@@ -44,8 +44,5 @@ private:
 	string asciiDataBit;
 	string thisAddress;
 	string otherAddress;
-
-	bool lastFrame;
-	bool receiveSuccess;
 };
 

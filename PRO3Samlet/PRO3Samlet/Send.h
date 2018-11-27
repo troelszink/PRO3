@@ -1,10 +1,5 @@
 #pragma once
 using namespace std;
-//#include "Receive.h"
-//#include "Inframe.h"
-//#include "Deframe.h"
-#include "Buffer.h"
-#include "Addresses.h"
 #include <vector>
 #include <string>
 #include <iostream>
@@ -12,6 +7,8 @@ using namespace std;
 #include <thread>
 #include <chrono>
 #include <bitset>
+#include "Buffer.h"
+#include "Addresses.h"
 
 class Send
 {

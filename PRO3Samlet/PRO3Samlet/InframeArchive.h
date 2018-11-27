@@ -1,10 +1,10 @@
 #pragma once
 using namespace std;
+#include <iostream>
 #include <string>
 #include <vector>
 #include "Inframe.h"
 #include "Send.h"
-#include <iostream>
 #include "Buffer.h"
 
 class InframeArchive
@@ -14,11 +14,9 @@ public:
 	InframeArchive(string);
 
 	void sendFrames();
-	void extractAddresses();
-	void splitAsciiString();
 	void makeFrames();
-
 	void printVector();
+
 	~InframeArchive();
 
 private:
@@ -28,7 +26,6 @@ private:
 	string asciiString;
 	string receiverAndSender;
 
-	vector<string> dataBitVector;
 	vector<string> frameVector;
 
 	Buffer* buff;	

@@ -1,6 +1,6 @@
 #include "Addresses.h"
 
-Addresses* Addresses::instance = 0;						// Første gang instansen oprettes initialiseres "instance" til at være , og static gør at denne værdi gemmes på tværs af instanser.
+Addresses* Addresses::instance = 0;						// Første gang instansen oprettes initialiseres "instance" til at være 0, og static gør at denne værdi gemmes på tværs af instanser.
 
 Addresses* Addresses::getInstance()						// Denne metode kaldes når der oprettes instanser af klassen.
 {
@@ -38,7 +38,7 @@ string Addresses::getThisAddress()
 	return thisAddress;
 }
 
-string Addresses::getOtherAdress()
+string Addresses::getOtherAddress()
 {
 	return otherAddress;
 }
@@ -48,14 +48,14 @@ int Addresses::getAck()
 	return ack;
 }
 
-void Addresses::setFrameNr(int nr)
+void Addresses::setFrameNo(int no)
 {
-	frameNr = nr;
+	frameNo = no;
 }
 
-int Addresses::getFrameNr()
+int Addresses::getFrameNo()
 {
-	return frameNr;
+	return frameNo;
 }
 
 Addresses::~Addresses()

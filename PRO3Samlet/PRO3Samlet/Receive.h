@@ -1,11 +1,11 @@
 #pragma once
 using namespace std;
+#include <iostream>
+#include <bitset>
 #include "Inframe.h"
 #include "Deframe.h"
 #include "Buffer.h"
 #include "Addresses.h"
-#include <iostream>
-#include <bitset>
 
 class Receive
 {
@@ -15,6 +15,7 @@ public:
 
 	void receiveBits(bitset<4>);
 	void interpret(string);
+	void sendAck(char, string);
 
 private:
 	int minFrameLength;
