@@ -1,0 +1,29 @@
+﻿  Buffer.cpp
+  COSinitClient.cpp
+  ClientRequestReply.cpp
+  DTMFDecode.cpp
+  InframeArchive.cpp
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\inframearchive.cpp(31): warning C4018: '<': signed/unsigned mismatch
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\inframearchive.cpp(41): warning C4018: '<': signed/unsigned mismatch
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\inframearchive.cpp(57): warning C4018: '<': signed/unsigned mismatch
+  InitFysikLag.cpp
+  KOMinit.cpp
+  OSInit.cpp
+  PlayDTMF.cpp
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\playdtmf.cpp(87): warning C4018: '<': signed/unsigned mismatch
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\playdtmf.cpp(132): warning C4244: '=': conversion from 'double' to 'sf::Int16', possible loss of data
+  Receive.cpp
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\receive.cpp(18): warning C4018: '>=': signed/unsigned mismatch
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\receive.cpp(76): warning C4018: '<': signed/unsigned mismatch
+  Send.cpp
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\send.cpp(30): warning C4018: '<': signed/unsigned mismatch
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\send.cpp(72): warning C4018: '<': signed/unsigned mismatch
+  ServerRequestReply.cpp
+  Source.cpp
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\source.cpp(17): warning C4018: '<': signed/unsigned mismatch
+  StreamRecorder.cpp
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\streamrecorder.cpp(55): warning C4018: '<': signed/unsigned mismatch
+  Generating Code...
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\playdtmf.cpp(76): warning C4715: 'PlayDTMF::bit2hex': not all control paths return a value
+c:\users\bruger\projekt\github\pro3\pro3samlet\pro3samlet\buffer.cpp(244): warning C4715: 'Buffer::bit2hex': not all control paths return a value
+  PRO3Samlet.vcxproj -> C:\Users\Bruger\Projekt\Github\PRO3\PRO3Samlet\Debug\PRO3Samlet.exe
