@@ -53,8 +53,16 @@ bool StreamRecorder::onProcessSamples(const Int16 * samples, size_t sampleCount)
 {
 
 	for (int i = 0; i < sampleCount; i++)
-		Buffer::getInstance()->addToDTMF_SlicesBufferRecive((int) samples[i]);
-	
+	{
+		try
+		{
+			Buffer::getInstance()->addToDTMF_SlicesBufferRecive((int) samples[i]);
+		}
+		catch (...)
+		{
+			break;
+		}
+	}
 	return true;
 }
 

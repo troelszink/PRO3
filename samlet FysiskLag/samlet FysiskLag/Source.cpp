@@ -59,31 +59,74 @@ void write(vector<double> data)
 	file.close();
 }
 
+vector<double> readSignal(string path)
+{
+	vector<double> returnVector;
+	string line;
+	ifstream file(path);
+	if (file.is_open())
+	{
+		while (getline(file, line))
+		{
+			returnVector.push_back(stod(line));
+		}
+
+	}
+	file.close();
+	return returnVector;
+}
 
 int main() 
 {
-	DeviceSettings();
-	thread recond;
+	/*
+	{
+		DeviceSettings();
+		thread recond;
+		thread decode;
+		bool debug = true;
+
+		DTMFDecode * dtmfdecode = new DTMFDecode(160, debug);
+		decode = thread(&DTMFDecode::decode, dtmfdecode);
+		StreamRecorder * streamreconder = new StreamRecorder();
+		recond = thread(&StreamRecorder::startStreamRecorder, streamreconder, 60000);
+
+		//sleep(sf::seconds(1));
+		//PlayDTMF().play2("C0FFE");
+
+		recond.join();
+		cout << "stop reconding" << endl;
+
+		dtmfdecode->stop();
+		decode.join();
+
+		if (debug)
+			write(dtmfdecode->getDebugData());
+
+	}
+	*/
+	
+	vector<double> signal = readSignal("C:/Users/Bruger/Desktop/data1541757433.txt");
+	if (signal.size() % 160 != 0)
+	{
+		while (signal.size() % 160 != 0)
+			signal.push_back(0);
+	}
+
+	cout << "Signal size: " << signal.size() << endl;
+
+	clock_t start = clock();
 	thread decode;
-	bool debug = true;
+	thread decode2;
 
-	DTMFDecode * dtmfdecode = new DTMFDecode(160,debug);
-	decode = thread(&DTMFDecode::decode, dtmfdecode);
-	StreamRecorder * streamreconder = new StreamRecorder();
-	recond = thread(&StreamRecorder::startStreamRecorder,streamreconder,60000);
+	DTMFDecode * dtmfdecode = new DTMFDecode(160, 4, false);
+	decode = thread(&DTMFDecode::begin_analyse_test, dtmfdecode, signal);
+	decode2 = thread(&DTMFDecode::decode_test, dtmfdecode);
 
-	//sleep(sf::seconds(1));
-	//PlayDTMF().play2("C0FFE");
-
-	recond.join();
-	cout << "stop reconding" << endl;
-
-	dtmfdecode->stop();
 	decode.join();
+	decode2.join();
+	clock_t stop = clock();
 
-	if (debug)
-		write(dtmfdecode->getDebugData());	
-
+	cout << "Det tog " << float(stop - start) / CLOCKS_PER_SEC << " s" << endl;
 
 	system("pause");
 }

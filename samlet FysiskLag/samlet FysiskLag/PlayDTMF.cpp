@@ -1,6 +1,5 @@
 #include "PlayDTMF.h"
 
-
 PlayDTMF::PlayDTMF()
 {
 	
@@ -9,17 +8,23 @@ PlayDTMF::PlayDTMF()
 void PlayDTMF::handler()
 {
 	string message = "";
-	while (true)
+	while (true && !Buffer::getInstance()->checkFlag(0))
 	{
 		try
 		{
 			bitset<4> tone = Buffer::getInstance()->takeFrom_datalinkToSound();
 			message += bit2hex(tone);
+			
+
 		}
 		catch (...)
 		{
 			if (Buffer::getInstance()->checkFlag(2) && Buffer::getInstance()->checkFlag(3))
 			{
+				for (char k : message)
+					cout << k << " ";
+				cout << endl;
+
 				Buffer::getInstance()->setFlag(3, false);
 				play2(message);
 				message.clear();

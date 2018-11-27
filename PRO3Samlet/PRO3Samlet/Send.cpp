@@ -3,7 +3,7 @@
 Send::Send()
 {
 	frameCnt = 0;														// Tæller hvilket frame send-metoden er nået til.
-	timerLength = 3;													// Hvor længe der må gå fra et frame sendes til der modtages et Ack.
+	timerLength = 60;													// Hvor længe der må gå fra et frame sendes til der modtages et Ack.
 	maxAttempts = 5;													// Hvor mange gange et frame må gensendes inden der opgives.
 	addrs = Addresses::getInstance();									// En pointer til Addresses-klassen oprettes.
 	buff = Buffer::getInstance();										// En pointer til Buffer-klassen oprettes.
@@ -34,9 +34,9 @@ void Send::sendFrames(vector<string> vec, string addr)
 		addrs->setAck(0);												// Et nyt frame er sendt, og ack sættes lig 0.
 		int ackCountdown = timerLength;									//ackCountdown fungerer som en timer på et antal sekunder.
 
-		while (true)
+		while (true && !buff->checkFlag(0))
 		{
-			this_thread::sleep_for(chrono::seconds(60));					// Hvert sekund tjekkes det om et ACK er modtaget.
+			this_thread::sleep_for(chrono::seconds(1));					// Hvert sekund tjekkes det om et ACK er modtaget.
 			if (addrs->getAck() == 1)
 			{
 				failedAttempts = 0;										// Hvis det er tilfældet nulstilles failedAttempts og loopet afbrydes.
@@ -68,14 +68,35 @@ void Send::sendFrames(vector<string> vec, string addr)
 
 void Send::frameToBuffer(string thisFrame)
 {
-	cout << thisFrame << endl;
+	//cout << thisFrame << endl;
 	for (int i = 0; i < thisFrame.length(); i++)
 	{
 		bitset<4> MSBs(bitset<8>(thisFrame[i]).to_string().substr(0, 4));
 		bitset<4> LSBs(bitset<8>(thisFrame[i]).to_string().substr(4, 4));
-
-		buff->addTo_datalinkToSound(MSBs);
-		buff->addTo_datalinkToSound(LSBs);
+		while (true && !buff->checkFlag(0))
+		{
+			try
+			{
+				buff->addTo_datalinkToSound(MSBs);
+				break;
+			}
+			catch (...)
+			{
+				this_thread::sleep_for(chrono::milliseconds(10));
+			}
+		}
+		while (true && !buff->checkFlag(0))
+		{
+			try
+			{
+				buff->addTo_datalinkToSound(LSBs);
+				break;
+			}
+			catch (...)
+			{
+				this_thread::sleep_for(chrono::milliseconds(10));
+			}
+		}
 	}
 	Buffer::getInstance()->setFlag(1, true);
 	Buffer::getInstance()->setFlag(3, true);

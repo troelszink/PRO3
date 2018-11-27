@@ -18,5 +18,10 @@ double KaskadeFilter::filter(double xn)
 	return y;
 }
 
+std::vector<BasicFilter> KaskadeFilter::getFilter()
+{
+	return filters;
+}
+
 KaskadeFilter::~KaskadeFilter()
 {}

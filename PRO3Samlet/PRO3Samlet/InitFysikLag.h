@@ -12,6 +12,7 @@ public:
 	~InitFysikLag();
 private:
 	thread decode;
+	thread decode2;
 	thread record;
 	thread send;
 };

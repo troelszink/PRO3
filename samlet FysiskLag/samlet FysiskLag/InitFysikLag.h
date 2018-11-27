@@ -8,9 +8,11 @@ class InitFysikLag
 {
 public:
 	InitFysikLag();
+	void run();
 	~InitFysikLag();
 private:
 	thread decode;
+	thread decode2;
 	thread record;
 	thread send;
 };

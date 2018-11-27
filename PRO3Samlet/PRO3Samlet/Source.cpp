@@ -31,7 +31,7 @@ void DeviceSettings()//P2A
 
 int main()
 {
-	DeviceSettings();
+	//DeviceSettings();
 	thread cos;
 	thread kom;
 	thread dsp;
@@ -60,7 +60,7 @@ int main()
 
 
 		a = 0;
-		cout << "enter 1 to stop" << endl;
+		cout << "Enter 1 to stop" << endl;
 		while (a != 1)
 		{
 			cin >> a;

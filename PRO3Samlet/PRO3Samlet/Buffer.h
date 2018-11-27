@@ -43,18 +43,49 @@ public:
 
 private:
 	static Buffer* instance;
+	char bit2hex(bitset<4> bit);
 	
 	Buffer();
 	~Buffer();
 
-	vector<double>DTMF_SlicesBufferRecive;//Er til at opbevare bider af funde og endnu ikke godkendte DTMF toner.
+	// Slicebuffer
+	
+	double DTMF_SlicesBufferRecive[480000];//Er til at opbevare bider af funde og endnu ikke godkendte DTMF toner.
+	int DTMF_Slices_maxSize = 480000;
+	int DTMF_Slices_nextIn = 0;
+	int DTMF_Slices_nextOut = 0;
+	int DTMF_Slices_size = 0;
 	mutex DTMF_sliceMutex;
-	vector<bitset<4>>soundToDatalink;//Er til at opbevare funde og godkendte DTMF toner.
+	
+	
+	bitset<4> soundToDatalink_buffer[20];//Er til at opbevare bider af funde og endnu ikke godkendte DTMF toner.
+	int soundToDatalink_maxSize = 20;
+	int soundToDatalink_nextIn = 0;
+	int soundToDatalink_nextOut = 0;
+	int soundToDatalink_size = 0;
+	mutex soundToDatalink_mutex;
 
-	vector<bitset<4>>datalinkToSound;//Er til at opbevare DTMF toner, der skal afspilles.
+	bitset<4> datalinkToSound_buffer[20];//Er til at opbevare bider af funde og endnu ikke godkendte DTMF toner.
+	int datalinkToSound_maxSize = 20;
+	int datalinkToSound_nextIn = 0;
+	int datalinkToSound_nextOut = 0;
+	int datalinkToSound_size = 0;
+	mutex datalinkToSound_mutex;
 
-	vector<string>appToDatalink;//(Klient perspektiv)Er til at opbevare forespørgelser fra klienten om server tjeneste.
-	vector<string>datalinkToApp;//(Klient perspektiv)Er til at opbevare svar om server tjeneste til klient fra server.
+	string appToDatalink_buffer[7]; //(Klient perspektiv)Er til at opbevare forespørgelser fra klienten om server tjeneste.
+	int appToDatalink_maxSize = 7;
+	int appToDatalink_nextIn = 0;
+	int appToDatalink_nextOut = 0;
+	int appToDatalink_size = 0;
+	mutex appToDatalink_mutex;
+
+	string datalinkToApp_buffer[2]; //(Klient perspektiv)Er til at opbevare svar om server tjeneste til klient fra server.
+	int datalinkToApp_maxSize = 2;
+	int datalinkToApp_nextIn = 0;
+	int datalinkToApp_nextOut = 0;
+	int datalinkToApp_size = 0;
+	mutex datalinkToApp_mutex;
+
 
 	bitset<4> message; // message;
 };

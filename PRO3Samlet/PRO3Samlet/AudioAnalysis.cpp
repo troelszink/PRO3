@@ -5,17 +5,14 @@
 AudioAnalysis::AudioAnalysis()
 {}
 
-AudioAnalysis::AudioAnalysis(int thres, int sampleRate, int hexthreshold, int Padding, unsigned short int pointsize,int ampThres, filterActive factive)
+AudioAnalysis::AudioAnalysis(int thres, int sampleRate, int hexthreshold, int Padding,int ampThres, filterActive factive)
 {
 
-	for (int i = 0; i < pointsize; i++)
-		confirm.push_back(16);
 	amplitudeThreshold = ampThres;
 	thresholdForTone = thres;
 	samplerate = sampleRate;
 	hexThreshold = hexthreshold;
 	padding = Padding;
-	pointSize = pointsize;
 	active = factive;
 
 	// Til test
@@ -23,53 +20,25 @@ AudioAnalysis::AudioAnalysis(int thres, int sampleRate, int hexthreshold, int Pa
 	freqValues = {697, 697, 770, 770, 852, 852, 941, 941, 1209, 1209, 1336, 1336, 1477, 1477, 1633, 1633};
 }
 // Rigtige analyse
-void AudioAnalysis::analysis(vector<double> signal)
+unsigned short int AudioAnalysis::analysis(vector<double> signal)
 {
 
 	if (mean(signal))
 	{
 		vector<double> filterSignal = filter(signal);
 		filterSignal = removeBelow(filterSignal);
-		unsigned short int r = findTones(filterSignal);
-
-		if (r < 16)
-		{
-			if (point == 0)
-				confirm[point++] = r;
-			else if (confirm[0] == r)
-				confirm[point++] = r;
-			else
-			{
-				point = 0;
-				confirm[point++] = r;
-			}
-
-			if (point == pointSize)
-			{
-				sendTone(confirm[0]);
-				confirm[0] = 16;
-				point = 0;
-			}
-
-		}
-		else
-		{
-			confirm[0] = 16;
-			point = 0;
-		}
+		return findTones(filterSignal);
 	}
 	else
 	{
-		confirm[0] = 16;
-		point = 0;
+		return 16;
 	}
 }
 
 
 void AudioAnalysis::sendTone(unsigned short int index)
 {
-	tones.push_back(index);
-	cout << index << endl;
+	//tones.push_back(index);
 }
 
 unsigned short int AudioAnalysis::findTones(vector<double> splitSignal)
@@ -270,140 +239,6 @@ vector<double> AudioAnalysis::removeBelow(vector<double> signal)
 	return signal;
 
 }
-
-// Test analyse
-void AudioAnalysis::analysis(vector<double> signal, bool test)
-{
-	if (mean(signal))
-	{
-		vector<double> filterSignal = filter(signal);
-		unsigned short int r = findTones2(signal);
-		if (r < 16)
-		{
-			if (point == 0)
-				confirm[point++] = r;
-			else if (confirm[0] == r)
-				confirm[point++] = r;
-			else
-			{
-				point = 0;
-				confirm[point++] = r;
-			}
-
-			if (point == pointSize)
-			{
-				sendTone(confirm[0]);
-				confirm[0] = 16;
-				point = 0;
-			}
-
-		}
-		else
-		{
-			confirm[0] = 16;
-			point = 0;
-		}
-	}
-	else
-	{
-		confirm[0] = 16;
-		point = 0;
-	}
-}
-
-unsigned short int AudioAnalysis::findTones2(vector<double> splitSignal)
-{
-	vector<int> freqs;
-	try
-	{
-		freqs = frequencyInSignal2(DSPMath().toComplex(splitSignal));
-	}
-	catch (string s)
-	{
-		return 16;
-	}
-
-	if (freqs[0] == 697 && freqs[1] == 1209)
-		return 0;
-	else if (freqs[0] == 697 && freqs[1] == 1336)
-		return 1;
-	else if (freqs[0] == 697 && freqs[1] == 1477)
-		return 2;
-	else if (freqs[0] == 697 && freqs[1] == 1633)
-		return 3;
-	else if (freqs[0] == 770 && freqs[1] == 1209)
-		return 4;
-	else if (freqs[0] == 770 && freqs[1] == 1336)
-		return 5;
-	else if (freqs[0] == 770 && freqs[1] == 1477)
-		return 6;
-	else if (freqs[0] == 770 && freqs[1] == 1633)
-		return 7;
-	else if (freqs[0] == 852 && freqs[1] == 1209)
-		return 8;
-	else if (freqs[0] == 852 && freqs[1] == 1336)
-		return 9;
-	else if (freqs[0] == 852 && freqs[1] == 1477)
-		return 10;
-	else if (freqs[0] == 852 && freqs[1] == 1633)
-		return 11;
-	else if (freqs[0] == 941 && freqs[1] == 1209)
-		return 12;
-	else if (freqs[0] == 941 && freqs[1] == 1336)
-		return 13;
-	else if (freqs[0] == 941 && freqs[1] == 1477)
-		return 14;
-	else if (freqs[0] == 941 && freqs[1] == 1633)
-		return 15;
-
-	return 16;
-}
-
-vector<int> AudioAnalysis::frequencyInSignal2(vector<complex<double>> signal)
-{
-	vector<complex<double>> padSignal = DSPMath().zeroPadding(signal, padding);
-	vector< complex<double> > freqSignal = DSPMath().DTF(padSignal,mValues);
-
-	vector<double> ampl = DSPMath().amplitude(freqSignal);
-
-	for (int i = 0; i < ampl.size(); i += 2)
-		cout << (ampl[i] + ampl[i + 1]) / 2 << " " ;
-		cout << endl;
-	vector<int> freqSelect;
-	int lowFreq = 0;
-	double lowMax = 0;
-	int highFreq = 0;
-	double highMax = 0;
-	for (int i = 0; i < ampl.size()/2; i++)
-	{
-		if (thresholdForTone < ampl[i] && lowMax < ampl[i])
-		{
-			lowFreq = i;
-			lowMax = ampl[i];
-		}
-	}
-
-	for (int i = (ampl.size() / 2); i < ampl.size(); i++)
-	{
-		if (thresholdForTone < ampl[i] && highMax < ampl[i])
-		{
-			highFreq = i;
-			highMax = ampl[i];
-		}
-	}
-
-	//freqSelect.push_back(freqValues[lowFreq]);
-	//freqSelect.push_back(freqValues[highFreq]);
-	freqSelect.push_back(0);
-	freqSelect.push_back(0);
-	cout << lowFreq << " " << highFreq << endl;
-
-	if (freqSelect.size() == 0)
-		throw "Empty";
-
-	return freqSelect;
-}
-
 // Genbrugt funktioner
 vector<int> AudioAnalysis::getTones()
 {

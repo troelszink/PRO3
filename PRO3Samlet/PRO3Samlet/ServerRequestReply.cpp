@@ -9,22 +9,34 @@ ServerRequestReply::ServerRequestReply()
 
 void ServerRequestReply::extract_Execute()
 {
-	while (true)
+	while (true && !buffer->checkFlag(0))
 	{
-		while (!buffer->getBufferLength(4) == 0)
+		string commandlist;
+		while (!buffer->getBufferLength(4) == 0 && !buffer->checkFlag(0))
 		{
-			string commandlist = buffer->takeFrom_datalinkToApp();
-
-			currentUser = commandlist.substr(4, 4);
-
-			if (commands[0][8] == '1') //write
+			while (true && !buffer->checkFlag(0))
 			{
-				constructFile("Hello World", "Hello World", 0, 0, commandlist.substr(9, commandlist.length() - 1));
+				try
+				{
+					 commandlist = buffer->takeFrom_datalinkToApp();
+				}
+				catch (...)
+				{
+					this_thread::sleep_for(chrono::milliseconds(20));
+				}
+			}
+
+			if (!buffer->checkFlag(0))
+			{
+				currentUser = commandlist.substr(4, 4);
+
+				if (commands[0][8] == '1') //write
+				{
+					constructFile("Hello World", "Hello World", 0, 0, commandlist.substr(9, commandlist.length() - 1));
+				}
 			}
 		}
 
-		if (buffer->checkFlag(0))
-			break;
 	}
 
 
