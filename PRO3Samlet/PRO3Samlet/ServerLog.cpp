@@ -119,6 +119,7 @@ void ServerLog::logSaveToFile()
 	{
 		fileToWrite << logVector[i];												// Det ønskede data skrives ind i den åbne fil.
 	}
+
 	cout << endl << "-------------------------[Amount of log elements]------------------------------" << endl << endl;
 	cout << "~[ "<< logAmount << " ]~"<< endl;
 					
@@ -132,11 +133,12 @@ string ServerLog::logChanges(string ClientId)
 	for (int i = logAmount - 1; i >= 0; i--)
 	{
 	//	if(//currentClientId==logId)
-
 	}
+
 	for (int i = 99; i > logAmount-1; i--)
 	{
 	}
+
 	return string();
 }
 

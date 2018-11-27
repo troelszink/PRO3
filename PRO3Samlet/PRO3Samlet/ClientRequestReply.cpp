@@ -79,7 +79,24 @@ void ClientRequestReply::upload(string fileName, int command)
 			}
 		}
 	}
+	else if (command == 5)
+	{
+		read(fileName);
+		completeFile = serverAddress + clientAddress + "5" + completeFile;
 
+		while (true)
+		{
+			try
+			{
+				buffer->addTo_appToDatalink(completeFile);
+				break;
+			}
+			catch (...)
+			{
+				this_thread::sleep_for(chrono::milliseconds(20));
+			}
+		}
+	}
 	
 }
 

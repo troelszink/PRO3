@@ -4,6 +4,7 @@
 #include <stdio.h>
 
 using namespace std;
+
 ArchiveServer::ArchiveServer()
 {
 	fileAmount = 0;
@@ -16,10 +17,9 @@ ArchiveServer::ArchiveServer()
 
 void ArchiveServer::constructFile(string name, string address, int root, int fileType, string dataToWrite)
 {
-
-	File newFile(name, address, root, fileType, dataToWrite);
-	addFile(newFile);
-	write(name, dataToWrite);
+	File newFile(name, address, root, fileType, dataToWrite);					// Opretter et nyt objekt med de 5 forskellige parametre
+	addFile(newFile);															// Tilføjer det nye File-objekt til vektoren files
+	write(name, dataToWrite);													// Skriver til en fil med navn og det data som skal være på filen
 }
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -29,13 +29,11 @@ string ArchiveServer::searchForFileAddress(string fileName)
 	string fileAddress;															// Filens addresse i selve server-mappen.
 	string fileRootAddress;														// Root-adressen til selve serveren.
 	string fileExtension;														// Filens type.
-	
+
 	for (int i = 0; i < fileAmount; i++)										// For-loopet kører for alle filer i vektoren Files, 
 																				// hvorefter der tjekkes på om en af dem matcher navnet på den ønskede fil.
 	{
-		cout << files[i].getName() << endl;
-
-		if (files[i].getName() == fileName)									// Der tjekkes hvorvidt fil i's navn er det samme som den ønskede fils navn.
+		if (files[i].getName() == fileName)										// Der tjekkes hvorvidt fil i's navn er det samme som den ønskede fils navn.
 		{
 			fileAddress = files[i].getAddress();
 			fileRootAddress = getRootAddress();
@@ -43,9 +41,8 @@ string ArchiveServer::searchForFileAddress(string fileName)
 			string fileRAE = fileRootAddress.append(fileAddress).append(fileExtension);
 			return fileRAE;														// Returnerer den fulde sti til filen.
 		}
-
 	}
-	return "";
+	throw "No Such File";
 }
 
 void ArchiveServer::addFile(File f)
@@ -60,14 +57,15 @@ void ArchiveServer::addFileNames(string n)
 	fileNameAmount++;
 }
 
-void ArchiveServer::listFiles()
+string ArchiveServer::sendFileList()
 {
-	cout << endl << "-----------------------------[Files on server]----------------------------------" << endl;
+	string fileList;
+
 	for (int i = 0; i < fileAmount; i++)
 	{
-		cout << "~[ " <<files[i].getAddress() + files[i].getFileType() << " ]~" << endl;
+		fileList += files[i].getName() + "/n";
 	}
-	cout << endl;
+	return fileList;
 }
 
 void ArchiveServer::fileOnServer(string fileNameCon)
@@ -76,12 +74,10 @@ void ArchiveServer::fileOnServer(string fileNameCon)
 	for (int i = 0; i < fileAmount; i++)										// For-loopet kører for alle filer i vektoren Files, 
 																				// hvorefter der tjekkes på om en af dem matcher navnet på den ønskede fil.
 	{
-
 		if (files[i].getName() == fileNameCon)									// Der tjekkes hvorvidt fil i's navn er det samme som den ønskede fils navn.
 		{
 			currentFile = i;
 		}
-
 	}
 }
 
@@ -115,10 +111,9 @@ void ArchiveServer::read(string specificFile)
 
 void ArchiveServer::removeFile(string fileName)
 {
-
 	string fileToBeRemoved = searchForFileAddress(fileName);
 
-	const char *fileToBeRemovedConv = fileToBeRemoved.c_str();
+	const char* fileToBeRemovedConv = fileToBeRemoved.c_str();
 
 	remove(fileToBeRemovedConv);
 	fileOnServer(fileName);
@@ -132,7 +127,6 @@ void ArchiveServer::removeFile(string fileName)
 
 
 //-----------------------------------------------------------------------------------------------------------------------------------------------------------//
-
 
 
 string ArchiveServer::getCompleteFile()
@@ -149,7 +143,6 @@ int ArchiveServer::getFileAmount()
 
 void ArchiveServer::checkCommands(string commandList)
 {
-
 	int length=0;
 	int lineAmount = 0;
 	int nameLength;
@@ -161,6 +154,7 @@ void ArchiveServer::checkCommands(string commandList)
 
 	commandList.push_back('\n');
 	int lastPos = commandList.length() - 1;
+
 	while (lastPos >= 0)
 	{
 		if (commandList[lastPos] == 10)
@@ -175,18 +169,20 @@ void ArchiveServer::checkCommands(string commandList)
 		if (48 < (int)commandList[5] < 58)
 		{
 			int i = 5;
+
 			while (commandList[i]!=32)
 			{
 				fileNumberLength++;
 			}
+
 			while ((int)commandList[length] != 10)
 			{
 				length++;
 			}
+
 			addFileNames(files[stoi(commandList.substr(5, fileNumberLength))].getName());
 			commandList.erase(0,length);
 			length = 0;
-
 		}
 
 		else
@@ -197,6 +193,7 @@ void ArchiveServer::checkCommands(string commandList)
 				{
 					length++;
 				}
+
 				nameLength = length - 5;
 				addFileNames(commandList.substr(length - nameLength, nameLength));
 				commandList.erase(0, length);

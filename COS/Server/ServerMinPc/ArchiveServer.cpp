@@ -166,11 +166,11 @@ void ArchiveServer::checkCommands(string commandList)
 
 	for (int i = 0; i < lineAmount; i++)
 	{
-		if (48 < (int)commandList[5] < 58)
+		if (48 < (int)commandList[8] < 58) //kun hvis klienten har listen med filnavn i forveje - sender en int.
 		{
-			int i = 5;
+			int j = 8;
 
-			while (commandList[i]!=32)
+			while (commandList[j]!=32)
 			{
 				fileNumberLength++;
 			}
@@ -180,7 +180,7 @@ void ArchiveServer::checkCommands(string commandList)
 				length++;
 			}
 
-			addFileNames(files[stoi(commandList.substr(5, fileNumberLength))].getName());
+			addFileNames(files[stoi(commandList.substr(9, fileNumberLength))].getName());
 			commandList.erase(0,length);
 			length = 0;
 		}
@@ -194,7 +194,7 @@ void ArchiveServer::checkCommands(string commandList)
 					length++;
 				}
 
-				nameLength = length - 5;
+				nameLength = length - 9;
 				addFileNames(commandList.substr(length - nameLength, nameLength));
 				commandList.erase(0, length);
 				length = 0;

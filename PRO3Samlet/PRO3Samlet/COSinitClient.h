@@ -10,5 +10,6 @@ public:
 	~COSinitClient();
 private:
 	thread t1;
+	thread t2;
 };
 
